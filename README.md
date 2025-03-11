@@ -23,38 +23,41 @@ local flyEnabled = false
 
 -- Funções de ativação/desativação
 local function toggleTeleport()
-  teleportEnabled = not teleportEnabled
-  if teleportEnabled then
-    teleportButton.Text = "Teleporte: Ligado"
-  else
-    teleportButton.Text = "Teleporte: Desligado"
-  end
+    teleportEnabled = not teleportEnabled
+    if teleportEnabled then
+        teleportButton.Text = "Teleporte: Ligado (Teleporta para ilha aleatória)"
+    else
+        teleportButton.Text = "Teleporte: Desligado"
+    end
 end
 
 local function toggleFly()
-  flyEnabled = not flyEnabled
-  if flyEnabled then
-    flyButton.Text = "Voar: Ligado"
-    enableFlyMode()
-  else
-    flyButton.Text = "Voar: Desligado"
-    disableFlyMode()
-  end
+    flyEnabled = not flyEnabled
+    if flyEnabled then
+        flyButton.Text = "Voar: Ligado (Permite voar)"
+        enableFlyMode()
+    else
+        flyButton.Text = "Voar: Desligado"
+        disableFlyMode()
+    end
 end
 
 -- Funções de teletransporte e voo (mantidas do script anterior)
 local function teleportToRandomIsland()
-  if teleportEnabled then
-    -- ... (código de teletransporte)
-  end
+    if teleportEnabled then
+        -- ... (código de teletransporte)
+        print("Teletransportando para ilha aleatória...") -- Mensagem de exemplo
+    end
 end
 
 local function enableFlyMode()
-  -- ... (código de voo)
+    -- ... (código de voo)
+    print("Modo de voo ativado.") -- Mensagem de exemplo
 end
 
 local function disableFlyMode()
-  -- ... (código de não voo)
+    -- ... (código de não voo)
+    print("Modo de voo desativado.") -- Mensagem de exemplo
 end
 
 -- Botões
@@ -76,7 +79,5 @@ flyButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 flyButton.TextColor3 = Color3.new(1, 1, 1)
 flyButton.MouseButton1Click:Connect(toggleFly)
 
--- Loop para teletransporte automático (opcional)
-while wait(5) do
-  teleportToRandomIsland()
-end
+-- Conectar funções aos botões (exemplo)
+teleportButton.MouseButton1Click:Connect(teleportToRandomIsland)
