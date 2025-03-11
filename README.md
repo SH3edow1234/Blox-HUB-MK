@@ -4,22 +4,25 @@ screenGui.Parent = game.Players.LocalPlayer.PlayerGui
 
 local mainFrame = Instance.new("Frame")
 mainFrame.Parent = screenGui
-mainFrame.Size = UDim2.new(0, 300, 0, 200)
+mainFrame.Size = UDim2.new(0, 300, 0, 350) -- Aumenta a altura do painel
 mainFrame.Position = UDim2.new(0.05, 0, 0.05, 0)
-mainFrame.BackgroundColor3 = Color3.new(0, 0, 0) -- Fundo preto
-mainFrame.BorderColor3 = Color3.new(1, 0, 0) -- Borda vermelha
+mainFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+mainFrame.BorderColor3 = Color3.new(1, 0, 0)
 mainFrame.BorderSizePixel = 2
 
--- Estampa de raio vermelho (substitua pelo seu ID de decalque)
+-- Estampa de raio vermelho
 local decal = Instance.new("Decal")
 decal.Parent = mainFrame
-decal.Texture = "rbxassetid://YOUR_DECAL_ID_HERE" -- Substitua pelo ID do seu decalque de raio
+decal.Texture = "rbxassetid://YOUR_DECAL_ID_HERE" -- Substitua pelo seu ID de decalque
 decal.Face = Enum.NormalId.Front
 decal.Size = Vector3.new(1, 1, 1)
 
 -- Variáveis de estado
 local teleportEnabled = false
 local flyEnabled = false
+local autoFarmEnabled = false
+local autoFarmChestEnabled = false
+local autoFarmLevelEnabled = false
 
 -- Funções de ativação/desativação
 local function toggleTeleport()
@@ -42,42 +45,131 @@ local function toggleFly()
     end
 end
 
+local function toggleAutoFarm()
+    autoFarmEnabled = not autoFarmEnabled
+    if autoFarmEnabled then
+        autoFarmButton.Text = "Auto Farm: Ligado"
+        startAutoFarm()
+    else
+        autoFarmButton.Text = "Auto Farm: Desligado"
+        stopAutoFarm()
+    end
+end
+
+local function toggleAutoFarmChest()
+    autoFarmChestEnabled = not autoFarmChestEnabled
+    if autoFarmChestEnabled then
+        autoFarmChestButton.Text = "Auto Farm Baú: Ligado"
+        startAutoFarmChest()
+    else
+        autoFarmChestButton.Text = "Auto Farm Baú: Desligado"
+        stopAutoFarmChest()
+    end
+end
+
+local function toggleAutoFarmLevel()
+    autoFarmLevelEnabled = not autoFarmLevelEnabled
+    if autoFarmLevelEnabled then
+        autoFarmLevelButton.Text = "Auto Farm Nível: Ligado"
+        startAutoFarmLevel()
+    else
+        autoFarmLevelButton.Text = "Auto Farm Nível: Desligado"
+        stopAutoFarmLevel()
+    end
+end
+
 -- Funções de teletransporte e voo (mantidas do script anterior)
 local function teleportToRandomIsland()
     if teleportEnabled then
-        -- ... (código de teletransporte)
-        print("Teletransportando para ilha aleatória...") -- Mensagem de exemplo
+        -- ... (código de teletransporte para ilha aleatória)
+        print("Teletransportando para ilha aleatória...")
     end
 end
 
 local function enableFlyMode()
     -- ... (código de voo)
-    print("Modo de voo ativado.") -- Mensagem de exemplo
+    print("Modo de voo ativado.")
 end
 
 local function disableFlyMode()
     -- ... (código de não voo)
-    print("Modo de voo desativado.") -- Mensagem de exemplo
+    print("Modo de voo desativado.")
+end
+
+-- Funções de autofarm (exemplos básicos)
+local function startAutoFarm()
+    -- ... (código para atacar NPCs automaticamente)
+    print("Auto farm iniciado.")
+end
+
+local function stopAutoFarm()
+    -- ... (código para parar o autofarm)
+    print("Auto farm parado.")
+end
+
+local function startAutoFarmChest()
+    -- ... (código para coletar baús automaticamente)
+    print("Auto farm de baú iniciado.")
+end
+
+local function stopAutoFarmChest()
+    -- ... (código para parar o autofarm de baú)
+    print("Auto farm de baú parado.")
+end
+
+local function startAutoFarmLevel()
+    -- ... (código para farmar nível automaticamente)
+    print("Auto farm de nível iniciado.")
+end
+
+local function stopAutoFarmLevel()
+    -- ... (código para parar o autofarm de nível)
+    print("Auto farm de nível parado.")
 end
 
 -- Botões
 local teleportButton = Instance.new("TextButton")
 teleportButton.Parent = mainFrame
 teleportButton.Position = UDim2.new(0.1, 0, 0.1, 0)
-teleportButton.Size = UDim2.new(0, 200, 0, 40)
+teleportButton.Size = UDim2.new(0, 200, 0, 30)
 teleportButton.Text = "Teleporte: Desligado"
 teleportButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 teleportButton.TextColor3 = Color3.new(1, 1, 1)
 teleportButton.MouseButton1Click:Connect(toggleTeleport)
+teleportButton.MouseButton1Click:Connect(teleportToRandomIsland)
 
 local flyButton = Instance.new("TextButton")
 flyButton.Parent = mainFrame
-flyButton.Position = UDim2.new(0.1, 0, 0.3, 0)
-flyButton.Size = UDim2.new(0, 200, 0, 40)
+flyButton.Position = UDim2.new(0.1, 0, 0.2, 0)
+flyButton.Size = UDim2.new(0, 200, 0, 30)
 flyButton.Text = "Voar: Desligado"
 flyButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 flyButton.TextColor3 = Color3.new(1, 1, 1)
 flyButton.MouseButton1Click:Connect(toggleFly)
 
--- Conectar funções aos botões (exemplo)
-teleportButton.MouseButton1Click:Connect(teleportToRandomIsland)
+local autoFarmButton = Instance.new("TextButton")
+autoFarmButton.Parent = mainFrame
+autoFarmButton.Position = UDim2.new(0.1, 0, 0.3, 0)
+autoFarmButton.Size = UDim2.new(0, 200, 0, 30)
+autoFarmButton.Text = "Auto Farm: Desligado"
+autoFarmButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+autoFarmButton.TextColor3 = Color3.new(1, 1, 1)
+autoFarmButton.MouseButton1Click:Connect(toggleAutoFarm)
+
+local autoFarmChestButton = Instance.new("TextButton")
+autoFarmChestButton.Parent = mainFrame
+autoFarmChestButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+autoFarmChestButton.Size = UDim2.new(0, 200, 0, 30)
+autoFarmChestButton.Text = "Auto Farm Baú: Desligado"
+autoFarmChestButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+autoFarmChestButton.TextColor3 = Color3.new(1, 1, 1)
+autoFarmChestButton.MouseButton1Click:Connect(toggleAutoFarmChest)
+
+local autoFarmLevelButton = Instance.new("TextButton")
+autoFarmLevelButton.Parent = mainFrame
+autoFarmLevelButton.Position = UDim2.new(0.1, 0, 0.5, 0)
+autoFarmLevelButton.Size = UDim2.new(0, 200, 0, 30)
+autoFarmLevelButton.Text = "Auto Farm Nível: Desligado"
+autoFarmLevelButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+autoFarmLevelButton.TextColor3 = Color3.new(1, 1, 1)
+autoFarm
